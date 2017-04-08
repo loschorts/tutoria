@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408055734) do
+ActiveRecord::Schema.define(version: 20170408065415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,23 +45,6 @@ ActiveRecord::Schema.define(version: 20170408055734) do
     t.index ["owner_type", "owner_id"], name: "index_images_on_owner_type_and_owner_id", using: :btree
   end
 
-  create_table "installs", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_installs_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_installs_on_reset_password_token", unique: true, using: :btree
-  end
-
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id",   null: false
     t.integer  "receiver_id", null: false
@@ -79,6 +62,10 @@ ActiveRecord::Schema.define(version: 20170408055734) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string   "first_name",                            null: false
+    t.string   "last_name",                             null: false
+    t.string   "language",               default: "en", null: false
+    t.string   "about",                                 null: false
     t.string   "email",                  default: "",   null: false
     t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
@@ -89,15 +76,7 @@ ActiveRecord::Schema.define(version: 20170408055734) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "first_name",                            null: false
-    t.string   "last_name",                             null: false
-    t.string   "language",               default: "en", null: false
-    t.string   "string",                                null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["first_name"], name: "index_users_on_first_name", using: :btree
-    t.index ["last_name"], name: "index_users_on_last_name", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
